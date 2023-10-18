@@ -8,9 +8,11 @@ public class FeedbackOrderKT {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ORDER_ID", nullable = false)
     private int order_in;
 }

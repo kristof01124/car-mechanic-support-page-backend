@@ -10,18 +10,19 @@ public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", nullable = false, length = 100)
     private String title;
 
-    @Column(name = "START_TIME")
+    @Column(name = "START_TIME", nullable = false)
     private int start_time;
 
     @Column(name = "END_TIME")
     private Date end_time;
 
-    @Column(name = "COMMENT")
+    @Column(name = "COMMENT", length = 1000)
     private String comment;
 
     @Column(name = "IS_SUCCESSFUL")
