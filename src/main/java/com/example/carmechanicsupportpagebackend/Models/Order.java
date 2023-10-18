@@ -3,7 +3,7 @@ package com.example.carmechanicsupportpagebackend.Models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "ORDER")
 public class Order {
 
     @Id

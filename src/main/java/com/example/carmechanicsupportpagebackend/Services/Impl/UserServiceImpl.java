@@ -1,8 +1,9 @@
-package com.example.carmechanicsupportpagebackend.Services;
+package com.example.carmechanicsupportpagebackend.Services.Impl;
 
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
-import com.example.carmechanicsupportpagebackend.dto.UserDAO;
+import com.example.carmechanicsupportpagebackend.Dtos.UserDAO;
+import com.example.carmechanicsupportpagebackend.Services.UserServices;
 
 import java.sql.Date;
 
@@ -11,7 +12,7 @@ import java.sql.Date;
  *
  * <p>This will be the implementation of the UserRepository interface, handled by the Spring IoC system.
  */
-public class UserRepositoryImpl implements UserRepository{
+public class UserServiceImpl implements UserServices {
     @Override
     public UserDAO getUserById(int id) throws EntryNotFoundException, MalformedRequestException {
         return null;

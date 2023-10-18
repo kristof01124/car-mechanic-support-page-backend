@@ -2,10 +2,10 @@ package com.example.carmechanicsupportpagebackend.Controllers;
 
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
-import com.example.carmechanicsupportpagebackend.dto.UserDAO;
-import com.example.carmechanicsupportpagebackend.dto.UserForCreationDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.UserDAO;
+import com.example.carmechanicsupportpagebackend.Dtos.UserForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Models.UserRoles;
-import com.example.carmechanicsupportpagebackend.dto.UserForUpdateDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.UserForUpdateDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

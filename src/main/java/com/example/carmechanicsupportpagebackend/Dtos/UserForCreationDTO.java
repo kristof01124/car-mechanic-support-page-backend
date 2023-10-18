@@ -1,6 +1,4 @@
-package com.example.carmechanicsupportpagebackend.dto;
-
-import org.springframework.lang.Nullable;
+package com.example.carmechanicsupportpagebackend.Dtos;
 
 import java.sql.Date;
 
