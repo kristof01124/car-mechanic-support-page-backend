@@ -3,7 +3,7 @@ package com.example.carmechanicsupportpagebackend.Services;
 
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
-import com.example.carmechanicsupportpagebackend.Models.UserDAO;
+import com.example.carmechanicsupportpagebackend.dto.UserDAO;
 
 import java.sql.Date;
 

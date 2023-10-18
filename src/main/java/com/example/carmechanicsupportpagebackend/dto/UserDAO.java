@@ -1,4 +1,7 @@
-package com.example.carmechanicsupportpagebackend.Models;
+package com.example.carmechanicsupportpagebackend.dto;
+
+import com.example.carmechanicsupportpagebackend.dto.UserForUpdateDTO;
+import com.example.carmechanicsupportpagebackend.dto.UserForCreationDTO;
 
 import java.sql.Date;
 
