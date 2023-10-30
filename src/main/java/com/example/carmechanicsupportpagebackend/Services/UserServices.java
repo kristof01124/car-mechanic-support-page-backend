@@ -3,7 +3,7 @@ package com.example.carmechanicsupportpagebackend.Services;
 
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
-import com.example.carmechanicsupportpagebackend.Models.UserDAO;
+import com.example.carmechanicsupportpagebackend.Dtos.UserDAO;
 
 import java.sql.Date;
 
@@ -19,7 +19,7 @@ import java.sql.Date;
  *
  * @See Models.UserDAO
  */
-public interface UserRepository {
+public interface UserServices {
 
     /**
      * GET request for a singular User

@@ -1,4 +1,4 @@
-package com.example.carmechanicsupportpagebackend.Models;
+package com.example.carmechanicsupportpagebackend.Dtos;
 
 import java.sql.Date;
 
