@@ -24,9 +24,17 @@ public class CarOrderKT {
     @Column(name = "CAR_ID", nullable = false)
     private int CAR_ID;
 
+    @ManyToOne
+    @JoinColumn(name="car_id")
+    private Car car;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", nullable = false)
     private int ORDER_ID;
+
+    @OneToOne
+    @JoinColumn(name="order_id")
+    private Order order;
 
 }

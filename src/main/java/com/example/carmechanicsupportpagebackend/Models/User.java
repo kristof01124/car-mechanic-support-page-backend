@@ -16,6 +16,7 @@ public class User {
     private int user_id;
     @OneToMany(mappedBy="user")
     private Set<UserCarKT> userCarKTSet;
+
     @Column(name = "FIRST_NAME", nullable = false, length = 50)
     private String first_name;
     @Column(name = "LAST_NAME", nullable = false, length = 50)

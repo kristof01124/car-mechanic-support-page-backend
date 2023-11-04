@@ -14,8 +14,7 @@ public class Car {
     @Column(name = "id", nullable = false)
     private int car_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID")
+    @OneToOne(mappedBy="car")
     private UserCarKT userCarKT;
 
     @OneToMany(mappedBy="car")

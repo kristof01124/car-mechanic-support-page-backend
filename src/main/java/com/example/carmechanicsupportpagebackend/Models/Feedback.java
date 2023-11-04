@@ -13,8 +13,9 @@ public class Feedback {
     @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
+    //TODO
+    //mappedby missing
     @ManyToOne
-    @JoinColumn(name = "FEEDBACK_ID", referencedColumnName = "FEEDBACK_ID")
     private FeedbackOrderKT feedbackOrderKT;
 
     @Column(name = "TITLE", nullable = false, length = 100)

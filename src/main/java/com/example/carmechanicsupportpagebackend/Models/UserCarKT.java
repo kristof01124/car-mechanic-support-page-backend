@@ -24,9 +24,17 @@ public class UserCarKT {
     @Column(name = "USER_ID", nullable = false)
     private int USER_ID;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="CAR_ID", nullable = false)
     private int CAR_ID;
+
+    @OneToOne
+    @JoinColumn(name="car_id")
+    private Car car;
 
 }

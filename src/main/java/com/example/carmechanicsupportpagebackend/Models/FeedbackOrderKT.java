@@ -22,8 +22,16 @@ public class FeedbackOrderKT {
     @Column(name = "FEEDBACK_ID", nullable = false)
     private int FEEDBACK_ID;
 
+    @ManyToOne
+    @JoinColumn(name="order_id")
+    private Order order;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", nullable = false)
     private int ORDER_ID;
+
+    @OneToMany
+    @JoinColumn(name="feedback_id")
+    private Set<Feedback> feedbacks;
 }

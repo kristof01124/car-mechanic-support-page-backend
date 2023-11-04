@@ -16,8 +16,7 @@ public class Order {
     @OneToMany(mappedBy="order")
     private Set<FeedbackOrderKT> feedbackOrderKTSet;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
+    @OneToOne(mappedBy="order")
     private CarOrderKT carOrderKT;
 
     @Column(name = "SEVERITY", nullable = false, length = 50)
