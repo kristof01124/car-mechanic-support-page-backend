@@ -17,7 +17,7 @@ public class Feedback {
     private String title;
 
     @Column(name = "START_TIME", nullable = false)
-    private int start_time;
+    private Date start_time;
 
     @Column(name = "END_TIME")
     private Date end_time;
