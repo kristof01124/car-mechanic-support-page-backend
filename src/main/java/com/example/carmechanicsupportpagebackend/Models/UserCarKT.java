@@ -1,6 +1,6 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
-import jakarta.persistence.*;
+/*import jakarta.persistence.*;
 
 @Entity
 @Table(name = "USER_CAR_KT")
@@ -19,3 +19,4 @@ public class UserCarKT {
     private Car car_id;
 
 }
+*/

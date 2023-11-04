@@ -66,7 +66,7 @@ public class UserController {
                 return new ResponseEntity<>(user, HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such entry!");
+        throw new EntryNotFoundException("No such car!");
 
     }
 
@@ -80,6 +80,6 @@ public class UserController {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such entry!");
+        throw new EntryNotFoundException("No such car!");
     }
 }
