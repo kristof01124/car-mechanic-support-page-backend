@@ -3,6 +3,7 @@ package com.example.carmechanicsupportpagebackend.Models;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "CAR")
@@ -10,8 +11,15 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CAR_ID", nullable = false)
+    @Column(name = "id", nullable = false)
     private int car_id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID")
+    private UserCarKT userCarKT;
+
+    @OneToMany(mappedBy="car")
+    private Set<CarOrderKT> carOrderKTSet;
 
     @Column(name = "BRAND", nullable = false, length = 50)
     private String brand;

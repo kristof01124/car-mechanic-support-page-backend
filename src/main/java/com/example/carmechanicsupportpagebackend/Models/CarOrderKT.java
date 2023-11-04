@@ -6,14 +6,27 @@ import jakarta.persistence.*;
 @Table(name = "CAR_ORDER_KT")
 public class CarOrderKT {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @ManyToOne
+//    @JoinColumn(name = "CAR_ID", nullable = false)
+//    private Car car;
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @OneToOne
+//    @JoinColumn(name = "ORDER_ID", nullable = false)
+//    private Order order;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CAR_ID", nullable = false)
-    private int car_id;
+    private int CAR_ID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", nullable = false)
-    private int order_id;
+    private int ORDER_ID;
 
 }

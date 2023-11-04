@@ -2,6 +2,8 @@ package com.example.carmechanicsupportpagebackend.Models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "ORDER")
 public class Order {
@@ -10,6 +12,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", nullable = false)
     private int order_id;
+
+    @OneToMany(mappedBy="order")
+    private Set<FeedbackOrderKT> feedbackOrderKTSet;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
+    private CarOrderKT carOrderKT;
 
     @Column(name = "SEVERITY", nullable = false, length = 50)
     private String severity;
