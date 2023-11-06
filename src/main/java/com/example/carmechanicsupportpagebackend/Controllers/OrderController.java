@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
     //Replace these two variables when we have an actual DB
     List<OrderDAO> shittyMockDB = new ArrayList<>();

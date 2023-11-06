@@ -17,6 +17,7 @@ import java.util.List;
 
 //TODO: Megcsinálni az egész osztályt amint van DB
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     //Replace these two variables when we have an actual DB
