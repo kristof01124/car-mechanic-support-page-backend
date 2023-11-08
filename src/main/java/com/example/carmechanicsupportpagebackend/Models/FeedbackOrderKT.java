@@ -31,7 +31,7 @@ public class FeedbackOrderKT {
     @Column(name = "ORDER_ID", nullable = false)
     private int ORDER_ID;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name="feedback_id")
-    private Set<Feedback> feedbacks;
+    private Feedback feedback;
 }

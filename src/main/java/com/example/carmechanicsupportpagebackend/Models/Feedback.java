@@ -13,9 +13,7 @@ public class Feedback {
     @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
-    //TODO
-    //mappedby missing
-    @ManyToOne
+    @OneToOne(mappedBy="feedback")
     private FeedbackOrderKT feedbackOrderKT;
 
     @Column(name = "TITLE", nullable = false, length = 100)

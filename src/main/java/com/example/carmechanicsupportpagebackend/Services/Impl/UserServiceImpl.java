@@ -5,7 +5,7 @@ import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestExce
 import com.example.carmechanicsupportpagebackend.Dtos.UserDAO;
 import com.example.carmechanicsupportpagebackend.Models.User;
 import com.example.carmechanicsupportpagebackend.Repositories.UserRepository;
-import com.example.carmechanicsupportpagebackend.Services.Mapper.UserMapper;
+//import com.example.carmechanicsupportpagebackend.Services.Mapper.UserMapper;
 import com.example.carmechanicsupportpagebackend.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserServices {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    UserMapper userMapper;
+//    @Autowired
+//    UserMapper userMapper;
 
     @Override
     public UserDAO getUserById(int id) throws EntryNotFoundException, MalformedRequestException {
