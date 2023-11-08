@@ -32,9 +32,13 @@ public class Car {
     @Column(name = "SERIAL_NUMBER", length = 15)
     private String serial_number;
 
-    protected Car() {}
-    public Car(int car_id, String brand, String type, String license_plate, String serial_number) {
+    public Car() {
+    }
+
+    public Car(int car_id, UserCarKT userCarKT, Set<CarOrderKT> carOrderKTSet, String brand, String type, String license_plate, String serial_number) {
         this.car_id = car_id;
+        this.userCarKT = userCarKT;
+        this.carOrderKTSet = carOrderKTSet;
         this.brand = brand;
         this.type = type;
         this.license_plate = license_plate;
@@ -45,63 +49,62 @@ public class Car {
         return car_id;
     }
 
-    public void setCar_id(int car_id) {
+    public Car setCar_id(int car_id) {
         this.car_id = car_id;
+        return this;
+    }
+
+    public UserCarKT getUserCarKT() {
+        return userCarKT;
+    }
+
+    public Car setUserCarKT(UserCarKT userCarKT) {
+        this.userCarKT = userCarKT;
+        return this;
+    }
+
+    public Set<CarOrderKT> getCarOrderKTSet() {
+        return carOrderKTSet;
+    }
+
+    public Car setCarOrderKTSet(Set<CarOrderKT> carOrderKTSet) {
+        this.carOrderKTSet = carOrderKTSet;
+        return this;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public Car setBrand(String brand) {
         this.brand = brand;
+        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public Car setType(String type) {
         this.type = type;
+        return this;
     }
 
     public String getLicense_plate() {
         return license_plate;
     }
 
-    public void setLicense_plate(String license_plate) {
+    public Car setLicense_plate(String license_plate) {
         this.license_plate = license_plate;
+        return this;
     }
 
     public String getSerial_number() {
         return serial_number;
     }
 
-    public void setSerial_number(String serial_number) {
+    public Car setSerial_number(String serial_number) {
         this.serial_number = serial_number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Car car = (Car) o;
-        return car_id == car.car_id && brand.equals(car.brand) && type.equals(car.type) && license_plate.equals(car.license_plate) && serial_number.equals(car.serial_number);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(car_id, brand, type, license_plate, serial_number);
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "car_id=" + car_id +
-                ", brand='" + brand + '\'' +
-                ", type='" + type + '\'' +
-                ", license_plate='" + license_plate + '\'' +
-                ", serial_number='" + serial_number + '\'' +
-                '}';
+        return this;
     }
 }

@@ -37,4 +37,49 @@ public class CarOrderKT {
     @JoinColumn(name="order_id")
     private Order order;
 
+    public CarOrderKT() {
+    }
+
+    public CarOrderKT(int CAR_ID, Car car, int ORDER_ID, Order order) {
+        this.CAR_ID = CAR_ID;
+        this.car = car;
+        this.ORDER_ID = ORDER_ID;
+        this.order = order;
+    }
+
+    public int getCAR_ID() {
+        return CAR_ID;
+    }
+
+    public CarOrderKT setCAR_ID(int CAR_ID) {
+        this.CAR_ID = CAR_ID;
+        return this;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public CarOrderKT setCar(Car car) {
+        this.car = car;
+        return this;
+    }
+
+    public int getORDER_ID() {
+        return ORDER_ID;
+    }
+
+    public CarOrderKT setORDER_ID(int ORDER_ID) {
+        this.ORDER_ID = ORDER_ID;
+        return this;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public CarOrderKT setOrder(Order order) {
+        this.order = order;
+        return this;
+    }
 }

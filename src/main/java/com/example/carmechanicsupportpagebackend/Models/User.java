@@ -30,10 +30,12 @@ public class User {
     @Column(name = "USER_ROLE", length = 10)
     private String user_role;
 
-    protected User() {}
+    public User() {
+    }
 
-    public User(int user_id, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role) {
+    public User(int user_id, Set<UserCarKT> userCarKTSet, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role) {
         this.user_id = user_id;
+        this.userCarKTSet = userCarKTSet;
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;
@@ -46,8 +48,17 @@ public class User {
         return user_id;
     }
 
-    public User setUser_id(int id) {
-        this.user_id = id;
+    public User setUser_id(int user_id) {
+        this.user_id = user_id;
+        return this;
+    }
+
+    public Set<UserCarKT> getUserCarKTSet() {
+        return userCarKTSet;
+    }
+
+    public User setUserCarKTSet(Set<UserCarKT> userCarKTSet) {
+        this.userCarKTSet = userCarKTSet;
         return this;
     }
 
@@ -103,31 +114,5 @@ public class User {
     public User setUser_role(String user_role) {
         this.user_role = user_role;
         return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return user_id == user.user_id && first_name.equals(user.first_name) && last_name.equals(user.last_name) && date_of_birth.equals(user.date_of_birth) && phone_nuber.equals(user.phone_nuber) && email_address.equals(user.email_address) && user_role.equals(user.user_role);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(user_id, first_name, last_name, date_of_birth, phone_nuber, email_address, user_role);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + user_id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", date_of_birth=" + date_of_birth +
-                ", phone_nuber='" + phone_nuber + '\'' +
-                ", email_address='" + email_address + '\'' +
-                ", user_role='" + user_role + '\'' +
-                '}';
     }
 }
