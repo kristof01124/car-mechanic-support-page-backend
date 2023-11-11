@@ -6,12 +6,12 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "CAR")
+@Table(name = "Cars")
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "car_id", nullable = false)
     private int car_id;
 
     @OneToOne(mappedBy="car")
