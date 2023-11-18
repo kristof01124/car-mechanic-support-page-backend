@@ -29,11 +29,13 @@ public class User {
     private String email_address;
     @Column(name = "USER_ROLE", length = 10)
     private String user_role;
+    @Column(name = "PASSWORD", length = 30)
+    private String password;
 
     public User() {
     }
 
-    public User(int user_id, Set<UserCarKT> userCarKTSet, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role) {
+    public User(int user_id, Set<UserCarKT> userCarKTSet, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role, String password) {
         this.user_id = user_id;
         this.userCarKTSet = userCarKTSet;
         this.first_name = first_name;
@@ -42,6 +44,7 @@ public class User {
         this.phone_nuber = phone_nuber;
         this.email_address = email_address;
         this.user_role = user_role;
+        this.password = password;
     }
 
     public int getUser_id() {
@@ -114,5 +117,13 @@ public class User {
     public User setUser_role(String user_role) {
         this.user_role = user_role;
         return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
