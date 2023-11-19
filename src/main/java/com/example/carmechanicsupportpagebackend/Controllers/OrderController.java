@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @PostMapping("/Orders")
-    public ResponseEntity createNewCar(@RequestBody OrderForCreationDTO newOrder){
+    public ResponseEntity createNewOrder(@RequestBody OrderForCreationDTO newOrder){
         entryIndexCounter++;
         OrderDAO orderToAdd = new OrderDAO(entryIndexCounter, newOrder);
 
@@ -44,7 +44,7 @@ public class OrderController {
     }
 
     @PatchMapping("/Orders/{id}")
-    public ResponseEntity updateCar(@PathVariable int id, @RequestBody OrderForUpdateDTO orderNewData){
+    public ResponseEntity updateOrder(@PathVariable int id, @RequestBody OrderForUpdateDTO orderNewData){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
         for (OrderDAO order : shittyMockDB){
@@ -53,12 +53,12 @@ public class OrderController {
                 return new ResponseEntity<>(order, HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such car!");
+        throw new EntryNotFoundException("No such order!");
 
     }
 
     @DeleteMapping("/Orders/{id}")
-    public ResponseEntity deleteCar(@PathVariable int id){
+    public ResponseEntity deleteOrder(@PathVariable int id){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
         for (OrderDAO order : shittyMockDB){
@@ -67,6 +67,6 @@ public class OrderController {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such entry!");
+        throw new EntryNotFoundException("No such order!");
     }
 }

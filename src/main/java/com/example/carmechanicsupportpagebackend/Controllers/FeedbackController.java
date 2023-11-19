@@ -30,11 +30,11 @@ public class FeedbackController {
                 return new ResponseEntity<>(feedback, HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such car!");
+        throw new EntryNotFoundException("No such feedback!");
     }
 
     @PostMapping("/Feedbacks")
-    public ResponseEntity createNewCar(@RequestBody FeedbackForCreationDTO newFeedback){
+    public ResponseEntity createNewFeedback(@RequestBody FeedbackForCreationDTO newFeedback){
         entryIndexCounter++;
         FeedbackDAO feedbackToAdd = new FeedbackDAO(entryIndexCounter, newFeedback);
 
@@ -44,7 +44,7 @@ public class FeedbackController {
     }
 
     @PatchMapping("/Feedbacks/{id}")
-    public ResponseEntity updateCar(@PathVariable int id, @RequestBody FeedbackForUpdateDTO feedbackNewData){
+    public ResponseEntity updateFeedback(@PathVariable int id, @RequestBody FeedbackForUpdateDTO feedbackNewData){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
         for (FeedbackDAO feedback : shittyMockDB){
@@ -53,12 +53,12 @@ public class FeedbackController {
                 return new ResponseEntity<>(feedback, HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such car!");
+        throw new EntryNotFoundException("No such feedback!");
 
     }
 
     @DeleteMapping("/Feedbacks/{id}")
-    public ResponseEntity deleteCar(@PathVariable int id){
+    public ResponseEntity deleteFeedback(@PathVariable int id){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
         for (FeedbackDAO feedback : shittyMockDB){
@@ -67,6 +67,6 @@ public class FeedbackController {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-        throw new EntryNotFoundException("No such entry!");
+        throw new EntryNotFoundException("No such feedback!");
     }
 }
