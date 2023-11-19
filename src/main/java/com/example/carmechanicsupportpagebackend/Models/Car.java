@@ -2,14 +2,23 @@ package com.example.carmechanicsupportpagebackend.Models;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
-@Table(name = "CAR")
+@Table(name = "Cars")
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CAR_ID", nullable = false)
+    @Column(name = "car_id", nullable = false)
     private int car_id;
+
+    @OneToOne(mappedBy="car")
+    private UserCarKT userCarKT;
+
+    @OneToMany(mappedBy="car")
+    private Set<CarOrderKT> carOrderKTSet;
 
     @Column(name = "BRAND", nullable = false, length = 50)
     private String brand;
@@ -23,4 +32,79 @@ public class Car {
     @Column(name = "SERIAL_NUMBER", length = 15)
     private String serial_number;
 
+    public Car() {
+    }
+
+    public Car(int car_id, UserCarKT userCarKT, Set<CarOrderKT> carOrderKTSet, String brand, String type, String license_plate, String serial_number) {
+        this.car_id = car_id;
+        this.userCarKT = userCarKT;
+        this.carOrderKTSet = carOrderKTSet;
+        this.brand = brand;
+        this.type = type;
+        this.license_plate = license_plate;
+        this.serial_number = serial_number;
+    }
+
+    public int getCar_id() {
+        return car_id;
+    }
+
+    public Car setCar_id(int car_id) {
+        this.car_id = car_id;
+        return this;
+    }
+
+    public UserCarKT getUserCarKT() {
+        return userCarKT;
+    }
+
+    public Car setUserCarKT(UserCarKT userCarKT) {
+        this.userCarKT = userCarKT;
+        return this;
+    }
+
+    public Set<CarOrderKT> getCarOrderKTSet() {
+        return carOrderKTSet;
+    }
+
+    public Car setCarOrderKTSet(Set<CarOrderKT> carOrderKTSet) {
+        this.carOrderKTSet = carOrderKTSet;
+        return this;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public Car setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Car setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public String getLicense_plate() {
+        return license_plate;
+    }
+
+    public Car setLicense_plate(String license_plate) {
+        this.license_plate = license_plate;
+        return this;
+    }
+
+    public String getSerial_number() {
+        return serial_number;
+    }
+
+    public Car setSerial_number(String serial_number) {
+        this.serial_number = serial_number;
+        return this;
+    }
 }
