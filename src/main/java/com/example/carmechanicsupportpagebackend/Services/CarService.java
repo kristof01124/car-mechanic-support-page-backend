@@ -1,5 +1,6 @@
 package com.example.carmechanicsupportpagebackend.Services;
 
+import com.example.carmechanicsupportpagebackend.Dtos.CarForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Models.Car;
 import com.example.carmechanicsupportpagebackend.Repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class CarService {
 
     public List<Car> getAllCars() {
         return carRepository.findAll();
+    }
+
+    public void addCar(CarForCreationDTO car){
+
     }
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
 
+import com.example.carmechanicsupportpagebackend.Dtos.UserForCreationDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -27,12 +28,25 @@ public class User {
     private String phone_nuber;
     @Column(name = "EMAIL_ADDRESS", length = 50)
     private String email_address;
-    @Column(name = "USER_ROLE", length = 10)
-    private String user_role;
+
     @Column(name = "PASSWORD", length = 30)
     private String password;
 
+    @Column(name = "USER_ROLE", length = 10)
+    private String user_role;
+
     public User() {
+    }
+
+    public User (UserForCreationDTO other){
+        this.first_name=other.first_name();
+        this.last_name=other.last_name();
+        this.date_of_birth=other.date_of_birth();
+        this.phone_nuber=other.phone_number();
+        this.email_address=other.email_address();
+        this.password=other.password();
+        this.user_role=other.user_role();
+
     }
 
     public User(int user_id, Set<UserCarKT> userCarKTSet, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role, String password) {
