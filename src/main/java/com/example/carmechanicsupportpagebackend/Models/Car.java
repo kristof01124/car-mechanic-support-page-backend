@@ -1,5 +1,6 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
+import com.example.carmechanicsupportpagebackend.Dtos.CarForCreationDTO;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -43,6 +44,13 @@ public class Car {
         this.type = type;
         this.license_plate = license_plate;
         this.serial_number = serial_number;
+    }
+
+    public Car(CarForCreationDTO other){
+        this.brand = other.brand();
+        this.type = other.type();
+        this.license_plate = other.license_plate();
+        this.serial_number = other.serial_number();
     }
 
     public int getCar_id() {

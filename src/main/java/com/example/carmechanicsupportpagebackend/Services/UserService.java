@@ -55,31 +55,31 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntryNotFoundException("No such User!"));
         if (newValues.first_name() != null
-        && newValues.first_name().length() > 0){
+        && !newValues.first_name().isEmpty()){
             user.setFirst_name(newValues.first_name());
         }
         if (newValues.last_name() != null
-                && newValues.last_name().length() > 0){
+                && !newValues.last_name().isEmpty()){
             user.setLast_name(newValues.last_name());
         }
         if (newValues.date_of_birth() !=null){
             user.setDate_of_birth(newValues.date_of_birth());
         }
         if (newValues.phone_number() != null
-                && newValues.phone_number().length() > 0){
+                && !newValues.phone_number().isEmpty()){
             user.setPhone_nuber(newValues.phone_number());
         }
         if (newValues.email_address() != null
-                && newValues.email_address().length() > 0
+                && !newValues.email_address().isEmpty()
                 && !userRepository.findUserByEmail(newValues.email_address()).isPresent()) {
             user.setEmail_address(newValues.email_address());
         }
         if (newValues.password() != null
-                && newValues.password().length() > 0){
+                && !newValues.password().isEmpty()){
             user.setPassword(newValues.password());
         }
         if (newValues.user_role() != null
-                && newValues.user_role().length() > 0){
+                && !newValues.user_role().isEmpty()){
             user.setUser_role(newValues.user_role());
         }
 
