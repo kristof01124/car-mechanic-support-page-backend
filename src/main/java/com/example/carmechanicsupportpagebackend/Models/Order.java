@@ -1,5 +1,7 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
+import com.example.carmechanicsupportpagebackend.Dtos.OrderForCreationDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.OrderForUpdateDTO;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -38,6 +40,17 @@ public class Order {
         this.severity = severity;
         this.approximate_position = approximate_position;
         this.description = description;
+    }
+
+    public Order(OrderForUpdateDTO other) {
+        this.severity = other.severity();
+        this.approximate_position = other.approximate_position();
+        this.description = other.description();
+    }
+    public Order(OrderForCreationDTO other) {
+        this.severity = other.severity();
+        this.approximate_position = other.approximate_position();
+        this.description = other.description();
     }
 
     public int getOrder_id() {
