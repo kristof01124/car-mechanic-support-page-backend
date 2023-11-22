@@ -23,7 +23,7 @@ public class FeedbackService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public Optional<Feedback> getOrderById(int id){
+    public Optional<Feedback> getFeedbackById(int id){
         return feedbackRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class FeedbackService {
         return feedbackRepository.findAll();
     }
 
-    public void addNewOrder(Feedback feedback){
+    public void addNewFeedback(Feedback feedback){
         //No need to check if the same entry already exists, because many cars can have the same problem
         feedbackRepository.save(feedback);
     }
@@ -48,7 +48,7 @@ public class FeedbackService {
 
     //I hate Java for forcing me to use such an ugly solution, jesus christ
     @Transactional
-    public void updateOrder(int feedbackId, FeedbackForUpdateDTO newValues){
+    public void updateFeedback(int feedbackId, FeedbackForUpdateDTO newValues){
         Feedback feedback = feedbackRepository.findById(feedbackId)
                 .orElseThrow(() -> new EntryNotFoundException("No such Feedback!"));
 
@@ -67,7 +67,7 @@ public class FeedbackService {
             feedback.setComment(newValues.comment());
         }
 
-        feedback.setIs_successful(newValues.isSuccessful());
+        feedback.setIs_successful(newValues.is_successful());
 
 
     }

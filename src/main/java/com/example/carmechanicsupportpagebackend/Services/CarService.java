@@ -53,7 +53,7 @@ public class CarService {
 
     //I hate Java for forcing me to use such an ugly solution, jesus christ
     @Transactional
-    public void updateUser(int carId, CarForUpdateDTO newValues){
+    public void updateCar(int carId, CarForUpdateDTO newValues){
         Car car = carRepository.findById(carId)
                 .orElseThrow(() -> new EntryNotFoundException("No such Car!"));
 

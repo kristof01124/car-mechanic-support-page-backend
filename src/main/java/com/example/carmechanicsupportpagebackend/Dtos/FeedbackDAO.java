@@ -25,7 +25,7 @@ public class FeedbackDAO {
         this.start_time = other.start_time();
         this.end_time = other.end_time();
         this.comment = other.comment();
-        this.is_successful = other.isSuccessful();
+        this.is_successful = other.is_successful();
     }
 
     public FeedbackDAO(int feedback_id, FeedbackForUpdateDTO other) {
@@ -34,7 +34,7 @@ public class FeedbackDAO {
         this.start_time = other.start_time();
         this.end_time = other.end_time();
         this.comment = other.comment();
-        this.is_successful = other.isSuccessful();
+        this.is_successful = other.is_successful();
     }
 
     public int getFeedback_id() {
@@ -90,7 +90,7 @@ public class FeedbackDAO {
         this.start_time = other.start_time();
         this.end_time = other.end_time();
         this.comment = other.comment();
-        this.is_successful = other.isSuccessful();
+        this.is_successful = other.is_successful();
     }
 
     public void setValuesToOtherFeedbackDTO(FeedbackForUpdateDTO other) {
@@ -98,6 +98,6 @@ public class FeedbackDAO {
         this.start_time = other.start_time();
         this.end_time = other.end_time();
         this.comment = other.comment();
-        this.is_successful = other.isSuccessful();
+        this.is_successful = other.is_successful();
     }
 }

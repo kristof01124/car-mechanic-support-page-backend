@@ -1,6 +1,9 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
 import java.sql.Date;
+
+import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForCreationDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForUpdateDTO;
 import jakarta.persistence.*;
 @Entity
 @Table(name = "FEEDBACK")
@@ -40,6 +43,21 @@ public class Feedback {
         this.end_time = end_time;
         this.comment = comment;
         this.is_successful = is_successful;
+    }
+    public Feedback(FeedbackForCreationDTO other) {
+        this.title = other.title();
+        this.start_time = other.start_time();
+        this.end_time = other.end_time();
+        this.comment = other.comment();
+        this.is_successful = other.is_successful();
+    }
+
+    public Feedback(FeedbackForUpdateDTO other) {
+        this.title = other.title();
+        this.start_time = other.start_time();
+        this.end_time = other.end_time();
+        this.comment = other.comment();
+        this.is_successful = other.is_successful();
     }
 
     public int getFeedback_id() {

@@ -2,19 +2,15 @@ package com.example.carmechanicsupportpagebackend.Controllers;
 
 import com.example.carmechanicsupportpagebackend.Dtos.CarForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Dtos.CarForUpdateDTO;
-import com.example.carmechanicsupportpagebackend.Dtos.UserForCreationDTO;
-import com.example.carmechanicsupportpagebackend.Dtos.UserForUpdateDTO;
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
 import com.example.carmechanicsupportpagebackend.Models.Car;
-import com.example.carmechanicsupportpagebackend.Models.User;
+import com.example.carmechanicsupportpagebackend.Services.CarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.carmechanicsupportpagebackend.Services.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Optional;
 
 //TODO: TEST THIS
@@ -46,7 +42,7 @@ public class CarController {
     }
 
     @PostMapping("/Cars")
-    public ResponseEntity createNewUser(@RequestBody CarForCreationDTO newCar){
+    public ResponseEntity createNewCar(@RequestBody CarForCreationDTO newCar){
         Car carToAdd=new Car(newCar);
 
         carService.addNewCar(carToAdd);
@@ -55,17 +51,17 @@ public class CarController {
     }
 
     @PatchMapping("/Cars/{id}")
-    public ResponseEntity updateCar(@PathVariable int id, @RequestBody CarForUpdateDTO userNewData){
+    public ResponseEntity updateCar(@PathVariable int id, @RequestBody CarForUpdateDTO carNewData){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
-        carService.updateUser(id, userNewData);
+        carService.updateCar(id, carNewData);
 
         return new ResponseEntity(HttpStatus.OK);
 
     }
 
     @DeleteMapping("/Cars/{id}")
-    public ResponseEntity deleteUser(@PathVariable int id){
+    public ResponseEntity deleteCar(@PathVariable int id){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
         if (carService.deleteCar(id))

@@ -1,14 +1,10 @@
 package com.example.carmechanicsupportpagebackend.Controllers;
 
+import com.example.carmechanicsupportpagebackend.Dtos.UserForCreationDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.UserForUpdateDTO;
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
-import com.example.carmechanicsupportpagebackend.Dtos.UserDAO;
-import com.example.carmechanicsupportpagebackend.Dtos.UserForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Models.User;
-import com.example.carmechanicsupportpagebackend.Models.UserRoles;
-import com.example.carmechanicsupportpagebackend.Dtos.UserForUpdateDTO;
-import com.example.carmechanicsupportpagebackend.Repositories.UserRepository;
-import com.example.carmechanicsupportpagebackend.Services.CarService;
 import com.example.carmechanicsupportpagebackend.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
-//TODO: Megcsinálni az egész osztályt amint van DB
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
