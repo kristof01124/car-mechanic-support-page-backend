@@ -1,0 +1,28 @@
+0. Töltsd le a MySql Workbench-et
+1. Töltsd le a mine.mwb modelt
+2. Importáld a modelt (file -->open model)
+3. Setup new connection
+4. port: 3307
+5. username: root
+6. OK
+7. Megnyitod az EER Diagramot
+8. Database-->Forward Engineer
+9. Portra figyelni
+10.username=root
+11. Vagy beállítod a jelszót itt, vagy a backend project app.properties fájljában kikommenteled az ehhez kapcsolódó sort
+12. Next mindenre
+(13. Elindítasz egy szervert a gépeden) (Ez lehet csak nekem kellett)
+14. Visszamész a MySQL Workbench homescreenjére, és rákattintasz a connectionre amit létrehoztál
+15. Futtatod a backend projected
+16. Kész
+
+
+Ismert hibák:
+1. Az Orders táblában van egy hibásan létrehozott oszlop "sevrity" néven "severity" helyett
+
+	Megoldás: alter table car_service.Orders drop column sevrity;
+
+2. UTF-8 karakterkódolás: az üzenetek nem tudják kezelni a hosszú ű betűt (feltehetőleg sok más karaktert sem,
+ de biztosan tud kezelni á, é, ö, ü betűket valószínűleg a német és spanyol ABC-k miatt)
+
+   Megoldás: egyelőre csak workaround van, ami annyi, hogy nem használjuk ezeket az ékezetes betűket 

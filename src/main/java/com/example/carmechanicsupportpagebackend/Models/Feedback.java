@@ -1,6 +1,10 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
 import java.sql.Date;
+
+import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForCreationDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForUpdateDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 @Entity
 @Table(name = "FEEDBACK")
@@ -11,8 +15,10 @@ public class Feedback {
     @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
-    @OneToOne(mappedBy="feedback")
-    private FeedbackOrderKT feedbackOrderKT;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    private Order relatedOrder;
 
     @Column(name = "TITLE", nullable = false, length = 100)
     private String title;
@@ -32,14 +38,29 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(int feedback_id, FeedbackOrderKT feedbackOrderKT, String title, Date start_time, Date end_time, String comment, boolean is_successful) {
+    public Feedback(int feedback_id, Order relatedOrder, String title, Date start_time, Date end_time, String comment, boolean is_successful) {
         this.feedback_id = feedback_id;
-        this.feedbackOrderKT = feedbackOrderKT;
+        this.relatedOrder = relatedOrder;
         this.title = title;
         this.start_time = start_time;
         this.end_time = end_time;
         this.comment = comment;
         this.is_successful = is_successful;
+    }
+    public Feedback(FeedbackForCreationDTO other) {
+        this.title = other.title();
+        this.start_time = other.start_time();
+        this.end_time = other.end_time();
+        this.comment = other.comment();
+        this.is_successful = other.is_successful();
+    }
+
+    public Feedback(FeedbackForUpdateDTO other) {
+        this.title = other.title();
+        this.start_time = other.start_time();
+        this.end_time = other.end_time();
+        this.comment = other.comment();
+        this.is_successful = other.is_successful();
     }
 
     public int getFeedback_id() {
@@ -51,12 +72,12 @@ public class Feedback {
         return this;
     }
 
-    public FeedbackOrderKT getFeedbackOrderKT() {
-        return feedbackOrderKT;
+    public Order getRelatedOrder() {
+        return relatedOrder;
     }
 
-    public Feedback setFeedbackOrderKT(FeedbackOrderKT feedbackOrderKT) {
-        this.feedbackOrderKT = feedbackOrderKT;
+    public Feedback setRelatedOrder(Order relatedOrder) {
+        this.relatedOrder = relatedOrder;
         return this;
     }
 

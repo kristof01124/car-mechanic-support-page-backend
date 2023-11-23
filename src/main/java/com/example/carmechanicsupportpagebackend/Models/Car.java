@@ -1,7 +1,10 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
+import com.example.carmechanicsupportpagebackend.Dtos.CarForCreationDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,11 +17,13 @@ public class Car {
     @Column(name = "car_id", nullable = false)
     private int car_id;
 
-    @OneToOne(mappedBy="car")
-    private UserCarKT userCarKT;
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="owner_id", referencedColumnName = "user_id")
+    private User owner;
 
-    @OneToMany(mappedBy="car")
-    private Set<CarOrderKT> carOrderKTSet;
+    @OneToMany(mappedBy="relatedCar")
+    private Set<Order> relatedOrders = new HashSet<>();
 
     @Column(name = "BRAND", nullable = false, length = 50)
     private String brand;
@@ -35,14 +40,20 @@ public class Car {
     public Car() {
     }
 
-    public Car(int car_id, UserCarKT userCarKT, Set<CarOrderKT> carOrderKTSet, String brand, String type, String license_plate, String serial_number) {
+    public Car(int car_id, User owner, String brand, String type, String license_plate, String serial_number) {
         this.car_id = car_id;
-        this.userCarKT = userCarKT;
-        this.carOrderKTSet = carOrderKTSet;
+        this.owner = owner;
         this.brand = brand;
         this.type = type;
         this.license_plate = license_plate;
         this.serial_number = serial_number;
+    }
+
+    public Car(CarForCreationDTO other){
+        this.brand = other.brand();
+        this.type = other.type();
+        this.license_plate = other.license_plate();
+        this.serial_number = other.serial_number();
     }
 
     public int getCar_id() {
@@ -54,21 +65,21 @@ public class Car {
         return this;
     }
 
-    public UserCarKT getUserCarKT() {
-        return userCarKT;
+    public User getOwner() {
+        return owner;
     }
 
-    public Car setUserCarKT(UserCarKT userCarKT) {
-        this.userCarKT = userCarKT;
+    public Car setOwner(User owner) {
+        this.owner = owner;
         return this;
     }
 
-    public Set<CarOrderKT> getCarOrderKTSet() {
-        return carOrderKTSet;
+    public Set<Order> getRelatedOrders() {
+        return relatedOrders;
     }
 
-    public Car setCarOrderKTSet(Set<CarOrderKT> carOrderKTSet) {
-        this.carOrderKTSet = carOrderKTSet;
+    public Car setRelatedOrders(Set<Order> relatedOrders) {
+        this.relatedOrders = relatedOrders;
         return this;
     }
 

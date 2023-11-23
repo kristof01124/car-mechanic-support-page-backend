@@ -1,72 +1,84 @@
 package com.example.carmechanicsupportpagebackend.Controllers;
 
-import com.example.carmechanicsupportpagebackend.Dtos.*;
+import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForCreationDTO;
+import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForUpdateDTO;
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
+import com.example.carmechanicsupportpagebackend.Models.Car;
+import com.example.carmechanicsupportpagebackend.Models.Feedback;
+import com.example.carmechanicsupportpagebackend.Models.Order;
+import com.example.carmechanicsupportpagebackend.Services.FeedbackService;
+import com.example.carmechanicsupportpagebackend.Services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class FeedbackController {
-    //Replace these two variables when we have an actual DB
-    List<FeedbackDAO> shittyMockDB = new ArrayList<>();
-    int entryIndexCounter=0;
+    private final FeedbackService feedbackService;
+    private final OrderService orderService;
+
+    @Autowired
+    public FeedbackController(FeedbackService feedbackService, OrderService orderService) {
+        this.feedbackService = feedbackService;
+        this.orderService = orderService;
+    }
 
     @GetMapping("/Feedbacks")
-    public ResponseEntity getFeedbacks(){
-        return new ResponseEntity(shittyMockDB, HttpStatus.OK);
+    public ResponseEntity getAllFeedbacks(){
+        return new ResponseEntity<>(feedbackService.getAllFeedbacks(), HttpStatus.OK);
     }
     @GetMapping("/Feedbacks/{id}")
     public ResponseEntity getFeedbackById(@PathVariable int id){
         if (id<1)
             throw new MalformedRequestException("An ID has to be a positive integer!");
-        for (FeedbackDAO feedback : shittyMockDB){
-            if (feedback.getFeedback_id() == id){
-                return new ResponseEntity<>(feedback, HttpStatus.OK);
-            }
-        }
-        throw new EntryNotFoundException("No such car!");
+
+        Optional<Feedback> feedbackById = feedbackService.getFeedbackById(id);
+        if (feedbackById.isPresent())
+            return new ResponseEntity<>(feedbackById.get(), HttpStatus.OK);
+        else
+            throw new EntryNotFoundException("No such feedback!");
     }
 
-    @PostMapping("/Feedbacks")
-    public ResponseEntity createNewCar(@RequestBody FeedbackForCreationDTO newFeedback){
-        entryIndexCounter++;
-        FeedbackDAO feedbackToAdd = new FeedbackDAO(entryIndexCounter, newFeedback);
+    @PostMapping("Orders/{orderid}/Feedbacks")
+    public ResponseEntity createNewFeedback(@PathVariable int orderid,@RequestBody FeedbackForCreationDTO newFeedback){
+        if (orderid<1)
+            throw new MalformedRequestException("An ID has to be a positive integer!");
 
-        shittyMockDB.add(feedbackToAdd);
+        Optional<Order> orderById = orderService.getOrderById(orderid);
+        if (orderById.isPresent())
+        {
+            Feedback feedbackToAdd=new Feedback(newFeedback);
+            feedbackToAdd.setRelatedOrder(orderById.get());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+            feedbackService.addNewFeedback(feedbackToAdd);
+
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else throw new EntryNotFoundException("No such Order!");
     }
 
     @PatchMapping("/Feedbacks/{id}")
-    public ResponseEntity updateCar(@PathVariable int id, @RequestBody FeedbackForUpdateDTO feedbackNewData){
+    public ResponseEntity updateFeedback(@PathVariable int id, @RequestBody FeedbackForUpdateDTO feedbackNewData){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
-        for (FeedbackDAO feedback : shittyMockDB){
-            if (feedback.getFeedback_id() == id){
-                feedback.setValuesToOtherFeedbackDTO(feedbackNewData);
-                return new ResponseEntity<>(feedback, HttpStatus.OK);
-            }
-        }
-        throw new EntryNotFoundException("No such car!");
+        feedbackService.updateFeedback(id, feedbackNewData);
+
+        return new ResponseEntity(HttpStatus.OK);
 
     }
 
     @DeleteMapping("/Feedbacks/{id}")
-    public ResponseEntity deleteCar(@PathVariable int id){
+    public ResponseEntity deleteFeedback(@PathVariable int id){
         if (id < 1)
             throw new MalformedRequestException("The ID has to be a positive integer!");
-        for (FeedbackDAO feedback : shittyMockDB){
-            if (feedback.getFeedback_id() == id){
-                shittyMockDB.remove(feedback);
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-        }
-        throw new EntryNotFoundException("No such entry!");
+        if (feedbackService.deleteFeedback(id))
+            return new ResponseEntity(HttpStatus.OK);
+        else
+            throw new EntryNotFoundException("No such feedback!");
     }
 }

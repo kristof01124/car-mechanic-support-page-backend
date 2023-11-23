@@ -13,16 +13,17 @@ public class UserDAO {
 
     String email_address;
 
-    //TODO: Figure out how to store enums using JPA
+    String password;
     String user_role;
 
-    public UserDAO(int user_id, String first_name, String last_name, Date date_of_birth, String phone_number, String email_address, String user_role) {
+    public UserDAO(int user_id, String first_name, String last_name, Date date_of_birth, String phone_number, String email_address, String password, String user_role) {
         this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;
         this.phone_number = phone_number;
         this.email_address = email_address;
+        this.password=password;
         this.user_role = user_role;
     }
 
@@ -33,6 +34,7 @@ public class UserDAO {
         this.date_of_birth = other.date_of_birth();
         this.phone_number = other.phone_number();
         this.email_address = other.email_address();
+        this.password=other.password();
         this.user_role = other.user_role();
     }
 
@@ -43,6 +45,7 @@ public class UserDAO {
         this.date_of_birth = other.date_of_birth();
         this.phone_number = other.phone_number();
         this.email_address = other.email_address();
+        this.password=other.password();
         this.user_role = other.user_role();
     }
 
