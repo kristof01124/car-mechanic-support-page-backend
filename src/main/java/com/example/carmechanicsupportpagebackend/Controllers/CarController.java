@@ -45,15 +45,6 @@ public class CarController {
             throw new EntryNotFoundException("No such car!");
     }
 
-    @PostMapping("/Cars")
-    public ResponseEntity createNewCar(@RequestBody CarForCreationDTO newCar){
-        Car carToAdd=new Car(newCar);
-
-        carService.addNewCar(carToAdd);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
     @PostMapping("Users/{userid}/Cars")
     public ResponseEntity createNewCarWithOwner(@PathVariable int userid,@RequestBody CarForCreationDTO newCar){
         if (userid<1)

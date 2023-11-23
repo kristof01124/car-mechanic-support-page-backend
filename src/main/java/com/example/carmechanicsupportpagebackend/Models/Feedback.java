@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForUpdateDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 @Entity
 @Table(name = "FEEDBACK")
@@ -14,7 +15,9 @@ public class Feedback {
     @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
-    @OneToOne(mappedBy="relatedFeedback")
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
     private Order relatedOrder;
 
     @Column(name = "TITLE", nullable = false, length = 100)

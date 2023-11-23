@@ -20,8 +20,7 @@ public class Order {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="car_id", referencedColumnName = "car_id")
     private Car relatedCar;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "feedback_id", referencedColumnName = "feedback_id")
+    @OneToOne(mappedBy="relatedOrder")
     private Feedback relatedFeedback;
 
 

@@ -4,8 +4,11 @@ import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForUpdateDTO;
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
+import com.example.carmechanicsupportpagebackend.Models.Car;
 import com.example.carmechanicsupportpagebackend.Models.Feedback;
+import com.example.carmechanicsupportpagebackend.Models.Order;
 import com.example.carmechanicsupportpagebackend.Services.FeedbackService;
+import com.example.carmechanicsupportpagebackend.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,12 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 public class FeedbackController {
     private final FeedbackService feedbackService;
+    private final OrderService orderService;
 
     @Autowired
-    public FeedbackController(FeedbackService feedbackService) {
+    public FeedbackController(FeedbackService feedbackService, OrderService orderService) {
         this.feedbackService = feedbackService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/Feedbacks")
@@ -39,13 +44,22 @@ public class FeedbackController {
             throw new EntryNotFoundException("No such feedback!");
     }
 
-    @PostMapping("/Feedbacks")
-    public ResponseEntity createNewFeedback(@RequestBody FeedbackForCreationDTO newFeedback){
-        Feedback FeedbackToAdd=new Feedback(newFeedback);
+    @PostMapping("Orders/{orderid}/Feedbacks")
+    public ResponseEntity createNewFeedback(@PathVariable int orderid,@RequestBody FeedbackForCreationDTO newFeedback){
+        if (orderid<1)
+            throw new MalformedRequestException("An ID has to be a positive integer!");
 
-        feedbackService.addNewFeedback(FeedbackToAdd);
+        Optional<Order> orderById = orderService.getOrderById(orderid);
+        if (orderById.isPresent())
+        {
+            Feedback feedbackToAdd=new Feedback(newFeedback);
+            feedbackToAdd.setRelatedOrder(orderById.get());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+            feedbackService.addNewFeedback(feedbackToAdd);
+
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else throw new EntryNotFoundException("No such Order!");
     }
 
     @PatchMapping("/Feedbacks/{id}")
