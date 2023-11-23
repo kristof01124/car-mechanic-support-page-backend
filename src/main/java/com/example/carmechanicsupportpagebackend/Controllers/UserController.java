@@ -38,6 +38,15 @@ public class UserController {
             throw new EntryNotFoundException("No such user!");
     }
 
+    @GetMapping("/Users/email/{email}")
+    public ResponseEntity getUserByEmail(@PathVariable String email){
+        Optional<User> userById = userService.getUserByEmail(email);
+        if (userById.isPresent())
+            return new ResponseEntity<>(userById.get(), HttpStatus.OK);
+        else
+            throw new EntryNotFoundException("No such user!");
+    }
+
     @PostMapping("/Users")
     public ResponseEntity createNewUser(@RequestBody UserForCreationDTO newUser){
         User userToAdd=new User(newUser);
