@@ -2,6 +2,7 @@ package com.example.carmechanicsupportpagebackend.Models;
 
 import com.example.carmechanicsupportpagebackend.Dtos.OrderForCreationDTO;
 import com.example.carmechanicsupportpagebackend.Dtos.OrderForUpdateDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -15,11 +16,15 @@ public class Order {
     @Column(name = "ORDER_ID", nullable = false)
     private int order_id;
 
-    @OneToMany(mappedBy="order")
-    private Set<FeedbackOrderKT> feedbackOrderKTSet;
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="car_id", referencedColumnName = "car_id")
+    private Car relatedCar;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "feedback_id", referencedColumnName = "feedback_id")
+    private Feedback relatedFeedback;
 
-    @OneToOne(mappedBy="order")
-    private CarOrderKT carOrderKT;
+
 
     @Column(name = "SEVERITY", nullable = false, length = 50)
     private String severity;
@@ -33,10 +38,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(int order_id, Set<FeedbackOrderKT> feedbackOrderKTSet, CarOrderKT carOrderKT, String severity, String approximate_position, String description) {
+    public Order(int order_id, Feedback relatedFeedback, Car relatedCar, String severity, String approximate_position, String description) {
         this.order_id = order_id;
-        this.feedbackOrderKTSet = feedbackOrderKTSet;
-        this.carOrderKT = carOrderKT;
+        this.relatedFeedback = relatedFeedback;
+        this.relatedCar = relatedCar;
         this.severity = severity;
         this.approximate_position = approximate_position;
         this.description = description;
@@ -62,21 +67,21 @@ public class Order {
         return this;
     }
 
-    public Set<FeedbackOrderKT> getFeedbackOrderKTSet() {
-        return feedbackOrderKTSet;
+    public Feedback getRelatedFeedback() {
+        return relatedFeedback;
     }
 
-    public Order setFeedbackOrderKTSet(Set<FeedbackOrderKT> feedbackOrderKTSet) {
-        this.feedbackOrderKTSet = feedbackOrderKTSet;
+    public Order setRelatedFeedback(Feedback relatedFeedback) {
+        this.relatedFeedback = relatedFeedback;
         return this;
     }
 
-    public CarOrderKT getCarOrderKT() {
-        return carOrderKT;
+    public Car getRelatedCar() {
+        return relatedCar;
     }
 
-    public Order setCarOrderKT(CarOrderKT carOrderKT) {
-        this.carOrderKT = carOrderKT;
+    public Order setRelatedCar(Car relatedCar) {
+        this.relatedCar = relatedCar;
         return this;
     }
 

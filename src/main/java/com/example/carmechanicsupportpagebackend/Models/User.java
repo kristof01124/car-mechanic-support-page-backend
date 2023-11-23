@@ -1,6 +1,7 @@
 package com.example.carmechanicsupportpagebackend.Models;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,8 +16,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID", nullable = false, length = 50)
     private int user_id;
-    @OneToMany(mappedBy="user")
-    private Set<UserCarKT> userCarKTSet;
+
+    @OneToMany(mappedBy="owner")
+    private Set<Car> ownedCars = new HashSet<>();
 
     @Column(name = "FIRST_NAME", nullable = false, length = 50)
     private String first_name;
@@ -49,9 +51,9 @@ public class User {
 
     }
 
-    public User(int user_id, Set<UserCarKT> userCarKTSet, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role, String password) {
+    public User(int user_id, Set<Car> ownedCars, String first_name, String last_name, Date date_of_birth, String phone_nuber, String email_address, String user_role, String password) {
         this.user_id = user_id;
-        this.userCarKTSet = userCarKTSet;
+        this.ownedCars = ownedCars;
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;
@@ -70,12 +72,12 @@ public class User {
         return this;
     }
 
-    public Set<UserCarKT> getUserCarKTSet() {
-        return userCarKTSet;
+    public Set<Car> getOwnedCars() {
+        return ownedCars;
     }
 
-    public User setUserCarKTSet(Set<UserCarKT> userCarKTSet) {
-        this.userCarKTSet = userCarKTSet;
+    public User setOwnedCars(Set<Car> ownedCars) {
+        this.ownedCars = ownedCars;
         return this;
     }
 
@@ -137,7 +139,8 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 }

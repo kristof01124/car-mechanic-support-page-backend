@@ -14,8 +14,8 @@ public class Feedback {
     @Column(name = "FEEDBACK_ID", nullable = false)
     private int feedback_id;
 
-    @OneToOne(mappedBy="feedback")
-    private FeedbackOrderKT feedbackOrderKT;
+    @OneToOne(mappedBy="relatedFeedback")
+    private Order relatedOrder;
 
     @Column(name = "TITLE", nullable = false, length = 100)
     private String title;
@@ -35,9 +35,9 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(int feedback_id, FeedbackOrderKT feedbackOrderKT, String title, Date start_time, Date end_time, String comment, boolean is_successful) {
+    public Feedback(int feedback_id, Order relatedOrder, String title, Date start_time, Date end_time, String comment, boolean is_successful) {
         this.feedback_id = feedback_id;
-        this.feedbackOrderKT = feedbackOrderKT;
+        this.relatedOrder = relatedOrder;
         this.title = title;
         this.start_time = start_time;
         this.end_time = end_time;
@@ -69,12 +69,12 @@ public class Feedback {
         return this;
     }
 
-    public FeedbackOrderKT getFeedbackOrderKT() {
-        return feedbackOrderKT;
+    public Order getRelatedOrder() {
+        return relatedOrder;
     }
 
-    public Feedback setFeedbackOrderKT(FeedbackOrderKT feedbackOrderKT) {
-        this.feedbackOrderKT = feedbackOrderKT;
+    public Feedback setRelatedOrder(Order relatedOrder) {
+        this.relatedOrder = relatedOrder;
         return this;
     }
 

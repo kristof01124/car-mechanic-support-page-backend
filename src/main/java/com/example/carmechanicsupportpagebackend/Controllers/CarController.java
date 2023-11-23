@@ -5,7 +5,9 @@ import com.example.carmechanicsupportpagebackend.Dtos.CarForUpdateDTO;
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Exceptions.MalformedRequestException;
 import com.example.carmechanicsupportpagebackend.Models.Car;
+import com.example.carmechanicsupportpagebackend.Models.User;
 import com.example.carmechanicsupportpagebackend.Services.CarService;
+import com.example.carmechanicsupportpagebackend.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,12 @@ import java.util.Optional;
 public class CarController {
 
     private final CarService carService;
+    private final UserService userService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarService carService, UserService userService) {
         this.carService = carService;
+        this.userService = userService;
     }
 
     @GetMapping("/Cars")
@@ -48,6 +52,26 @@ public class CarController {
         carService.addNewCar(carToAdd);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("Users/{userid}/Cars")
+    public ResponseEntity createNewCarWithOwner(@PathVariable int userid,@RequestBody CarForCreationDTO newCar){
+        if (userid<1)
+            throw new MalformedRequestException("An ID has to be a positive integer!");
+
+        Car carToAdd=new Car(newCar);
+
+        Optional<User> owner=userService.getUserById(userid);
+
+        if (owner.isPresent()){
+            carToAdd.setOwner(owner.get());
+            carService.addNewCar(carToAdd);
+
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else
+            throw new EntryNotFoundException("No such user!");
+
     }
 
     @PatchMapping("/Cars/{id}")

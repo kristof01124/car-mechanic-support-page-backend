@@ -15,8 +15,6 @@ You can test any functions using Postman or a similar program.
 *Stay tuned for more~*
 
 **Known bugs:**
-- The database needs to be downloaded separately, and it can only handle `utf-8` encoded characters, it errors out when encountering special hungarian characters, such as "ű" and "ő"
+- The database needs to be downloaded separately, and it can only handle `utf-8` encoded characters, it errors out when encountering special hungarian characters, such as "ű" and "ő". Probable cause: database was created using outdated software, and it is too late to change string encodings now without overhauling everything.
 - The database's "Orders" table contains a faulty column called "sevrity" instead of "severity". This was an oversight on part of the creator, but it can be fixed by running the following command:
-`ALTER TABLE car_service.orders DROP COLUMN sevrity;`
-
-It is currently unknown why the above faulty column escapes the Spring JPA's inconsistency detection, but fixing this will be top priority.
+`ALTER TABLE car_service.orders DROP COLUMN sevrity;`. The cause of this apart from human error is that `spring.jpa.hibernate.ddl-auto=update` only automates the creation and modification of existing columns, but does **NOT** drop any columns or tables probably as a safety precaution.
