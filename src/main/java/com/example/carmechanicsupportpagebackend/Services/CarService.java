@@ -32,6 +32,9 @@ public class CarService {
     public Optional<Car> getCarById(int id){
         return carRepository.findById(id);
     }
+    public Optional<Car> getCarByLicensePlate(String license_plate){
+        return carRepository.findCarByLicensePlate(license_plate);
+    }
 
     public void addNewCar(Car car){
         Optional<Car> carOptional = carRepository.findCarByLicensePlate(car.getLicense_plate());
