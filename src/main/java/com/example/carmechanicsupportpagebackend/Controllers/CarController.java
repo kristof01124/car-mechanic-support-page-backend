@@ -45,6 +45,15 @@ public class CarController {
             throw new EntryNotFoundException("No such car!");
     }
 
+    @GetMapping("/Cars/license_plate/{license_plate}")
+    public ResponseEntity getCarByLicensePlate(@PathVariable String license_plate){
+        Optional<Car> carByLicensePlate = carService.getCarByLicensePlate(license_plate);
+        if (carByLicensePlate.isPresent())
+            return new ResponseEntity<>(carByLicensePlate.get(), HttpStatus.OK);
+        else
+            throw new EntryNotFoundException("No such car!");
+    }
+
     @PostMapping("Users/{userid}/Cars")
     public ResponseEntity createNewCarWithOwner(@PathVariable int userid,@RequestBody CarForCreationDTO newCar){
         if (userid<1)
