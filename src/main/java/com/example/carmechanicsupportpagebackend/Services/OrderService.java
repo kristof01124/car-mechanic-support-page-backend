@@ -28,12 +28,19 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
+    public Optional<Order> getOrderByDescription(String description){
+        return orderRepository.findOrderByDescription(description);
+    }
+
     public List<Order> getAllOrders(){
         return orderRepository.findAll();
     }
 
     public void addNewOrder(Order order){
-        //No need to check if the same entry already exists, because many cars can have the same problem
+        Optional<Order> orderOptional=orderRepository.findOrderByDescription(order.getDescription());
+        if (orderOptional.isPresent()){
+            throw new EntryAlreadyExistsException("There already is an order with this exact description!");
+        }
         orderRepository.save(order);
     }
 

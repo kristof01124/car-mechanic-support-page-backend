@@ -2,6 +2,7 @@ package com.example.carmechanicsupportpagebackend.Services;
 
 import com.example.carmechanicsupportpagebackend.Dtos.FeedbackForUpdateDTO;
 import com.example.carmechanicsupportpagebackend.Dtos.OrderForUpdateDTO;
+import com.example.carmechanicsupportpagebackend.Exceptions.EntryAlreadyExistsException;
 import com.example.carmechanicsupportpagebackend.Exceptions.EntryNotFoundException;
 import com.example.carmechanicsupportpagebackend.Models.Feedback;
 import com.example.carmechanicsupportpagebackend.Models.Order;
@@ -27,12 +28,19 @@ public class FeedbackService {
         return feedbackRepository.findById(id);
     }
 
+    public Optional<Feedback> getFeedbackByComment(String comment){
+        return feedbackRepository.findFeedbackByComment(comment);
+    }
     public List<Feedback> getAllFeedbacks(){
         return feedbackRepository.findAll();
     }
 
     public void addNewFeedback(Feedback feedback){
-        //No need to check if the same entry already exists, because many cars can have the same problem
+        Optional<Feedback> feedbackOptional=feedbackRepository.findFeedbackByComment(feedback.getComment());
+        if (feedbackOptional.isPresent())
+        {
+            throw new EntryAlreadyExistsException("There already exists a feedback with this exact comment!");
+        }
         feedbackRepository.save(feedback);
     }
 

@@ -58,7 +58,7 @@ public class OrderController {
 
             orderService.addNewOrder(orderToAdd);
 
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(orderService.getOrderByDescription(newOrder.description()).get(),HttpStatus.CREATED);
         }
         else throw new EntryNotFoundException("No such car!");
     }
@@ -69,7 +69,7 @@ public class OrderController {
             throw new MalformedRequestException("The ID has to be a positive integer!");
         orderService.updateOrder(id, orderNewData);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(orderService.getOrderById(id).get(),HttpStatus.OK);
 
     }
 

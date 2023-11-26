@@ -67,7 +67,7 @@ public class CarController {
             carToAdd.setOwner(owner.get());
             carService.addNewCar(carToAdd);
 
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(carService.getCarByLicensePlate(newCar.license_plate()).get(),HttpStatus.CREATED);
         }
         else
             throw new EntryNotFoundException("No such user!");
@@ -80,7 +80,7 @@ public class CarController {
             throw new MalformedRequestException("The ID has to be a positive integer!");
         carService.updateCar(id, carNewData);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(carService.getCarById(id).get(),HttpStatus.OK);
 
     }
 

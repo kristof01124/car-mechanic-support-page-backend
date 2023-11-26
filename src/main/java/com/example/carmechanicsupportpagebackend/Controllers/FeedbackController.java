@@ -57,7 +57,7 @@ public class FeedbackController {
 
             feedbackService.addNewFeedback(feedbackToAdd);
 
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(feedbackService.getFeedbackByComment(newFeedback.comment()).get(),HttpStatus.CREATED);
         }
         else throw new EntryNotFoundException("No such Order!");
     }
@@ -68,7 +68,7 @@ public class FeedbackController {
             throw new MalformedRequestException("The ID has to be a positive integer!");
         feedbackService.updateFeedback(id, feedbackNewData);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(feedbackService.getFeedbackById(id).get(),HttpStatus.OK);
 
     }
 

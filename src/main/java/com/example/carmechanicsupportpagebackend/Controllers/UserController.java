@@ -53,7 +53,7 @@ public class UserController {
 
         userService.addNewUser(userToAdd);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.getUserByEmail(newUser.email_address()).get(),HttpStatus.CREATED);
     }
 
     @PatchMapping("/Users/{id}")
@@ -62,7 +62,7 @@ public class UserController {
             throw new MalformedRequestException("The ID has to be a positive integer!");
         userService.updateUser(id, userNewData);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(userService.getUserById(id).get(),HttpStatus.OK);
 
     }
 
